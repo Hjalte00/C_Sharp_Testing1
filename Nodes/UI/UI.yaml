@@ -166,12 +166,12 @@ Children:
       Type: BaseVariableType
       DataType: Size
       ModellingRule: Optional
-      Value: 200.0
+      Value: 660.0
     - Name: TopMargin
       Type: BaseVariableType
       DataType: Size
       ModellingRule: Optional
-      Value: 50.0
+      Value: 480.0
   - Name: RectanglePanel1
     Type: RectanglePanel
     Children:
@@ -256,11 +256,283 @@ Children:
       Type: BaseVariableType
       DataType: Size
       ModellingRule: Optional
-      Value: 100.0
+      Value: 520.0
     - Name: TopMargin
       Type: BaseVariableType
       DataType: Size
       ModellingRule: Optional
-      Value: 50.0
+      Value: 470.0
+  - Name: FillColor1
+    Type: FillColor
+    Children:
+    - Name: Rectangle
+      Type: Rectangle
+      Children:
+      - Name: ChangeColor
+        Type: NetLogic
+        Children:
+        - Class: Reference
+          Target: g=aa53f68dfb5c35b5228b04d335376347
+          Direction: Forward
+    - Name: ChangeColorButton
+      Type: Button
+      Children:
+      - Name: MouseClickEventHandler1
+        Type: EventHandler
+        Children:
+        - Name: ListenEventType
+          Type: PropertyType
+          DataType: NodeId
+          Value: {"Id":16,"Namespace":5}
+        - Name: MethodsToCall
+          Type: BaseObjectType
+          Children:
+          - Name: MethodContainer1
+            Type: BaseObjectType
+            Children:
+            - Name: ObjectPointer
+              Type: NodePointer
+              DataType: NodeId
+              Value: {"IdType":0,"Id":0,"Namespace":-1}
+              Children:
+              - Name: Kind
+                Type: PropertyType
+                DataType: NodeId
+                Value: {"Id":58}
+              - Name: DynamicLink
+                Type: DynamicLink
+                DataType: NodePath
+                Value: "../../../../../Rectangle/ChangeColor@NodeId"
+            - Name: Method
+              Type: BaseDataVariableType
+              DataType: String
+              Value: "ChangeColorMethod"
+        - Name: EventArguments
+          Type: MouseClickEvent
+          Children:
+          - Name: EventId
+            Type: PropertyType
+            DataType: ByteString
+            Value: ""
+          - Name: EventType
+            Type: PropertyType
+            DataType: NodeId
+            Value: {"IdType":0,"Id":0,"Namespace":-1}
+          - Name: SourceNode
+            Type: PropertyType
+            DataType: NodeId
+            Value: {"IdType":0,"Id":0,"Namespace":-1}
+          - Name: SourceName
+            Type: PropertyType
+            DataType: String
+            Value: ""
+          - Name: Time
+            Type: PropertyType
+            DataType: UtcTime
+            Value: "1601-01-01T00:00:00.0000000"
+          - Name: ReceiveTime
+            Type: PropertyType
+            DataType: UtcTime
+            Value: "1601-01-01T00:00:00.0000000"
+          - Name: Message
+            Type: PropertyType
+            DataType: LocalizedText
+            Value: {"NamespaceIndex":-1,"LocaleId":"","Text":""}
+          - Name: Severity
+            Type: PropertyType
+            DataType: UInt16
+            Value: 0
+    - Name: LeftMargin
+      Type: BaseVariableType
+      DataType: Size
+      ModellingRule: Optional
+      Value: 390.0
+    - Name: TopMargin
+      Type: BaseVariableType
+      DataType: Size
+      ModellingRule: Optional
+      Value: 470.0
+  - Name: MoreRandomFill1
+    Type: MoreRandomFill
+    Children:
+    - Name: Rectangle
+      Type: Rectangle
+      Children:
+      - Name: ChangeColorRandom
+        Type: NetLogic
+        Children:
+        - Class: Reference
+          Target: g=064af6783ab2f4a5cc5cfc854bd8c193
+          Direction: Forward
+    - Name: ChangeColorButton
+      Type: Button
+      Children:
+      - Name: MouseClickEventHandler1
+        Type: EventHandler
+        Children:
+        - Name: ListenEventType
+          Type: PropertyType
+          DataType: NodeId
+          Value: {"Id":16,"Namespace":5}
+        - Name: MethodsToCall
+          Type: BaseObjectType
+          Children:
+          - Name: MethodContainer1
+            Type: BaseObjectType
+            Children:
+            - Name: ObjectPointer
+              Type: NodePointer
+              DataType: NodeId
+              Value: {"IdType":0,"Id":0,"Namespace":-1}
+              Children:
+              - Name: Kind
+                Type: PropertyType
+                DataType: NodeId
+                Value: {"Id":58}
+              - Name: DynamicLink
+                Type: DynamicLink
+                DataType: NodePath
+                Value: "../../../../../Rectangle/ChangeColorRandom@NodeId"
+            - Name: Method
+              Type: BaseDataVariableType
+              DataType: String
+              Value: "ChangeColorMethod"
+        - Name: EventArguments
+          Type: MouseClickEvent
+          Children:
+          - Name: EventId
+            Type: PropertyType
+            DataType: ByteString
+            Value: ""
+          - Name: EventType
+            Type: PropertyType
+            DataType: NodeId
+            Value: {"IdType":0,"Id":0,"Namespace":-1}
+          - Name: SourceNode
+            Type: PropertyType
+            DataType: NodeId
+            Value: {"IdType":0,"Id":0,"Namespace":-1}
+          - Name: SourceName
+            Type: PropertyType
+            DataType: String
+            Value: ""
+          - Name: Time
+            Type: PropertyType
+            DataType: UtcTime
+            Value: "1601-01-01T00:00:00.0000000"
+          - Name: ReceiveTime
+            Type: PropertyType
+            DataType: UtcTime
+            Value: "1601-01-01T00:00:00.0000000"
+          - Name: Message
+            Type: PropertyType
+            DataType: LocalizedText
+            Value: {"NamespaceIndex":-1,"LocaleId":"","Text":""}
+          - Name: Severity
+            Type: PropertyType
+            DataType: UInt16
+            Value: 0
+    - Name: LeftMargin
+      Type: BaseVariableType
+      DataType: Size
+      ModellingRule: Optional
+      Value: 270.0
+    - Name: TopMargin
+      Type: BaseVariableType
+      DataType: Size
+      ModellingRule: Optional
+      Value: 470.0
+  - Name: MovingObject1
+    Type: MovingObject
+    Children:
+    - Name: MovingRectangle
+      Type: Rectangle
+      Children:
+      - Name: MovingScript
+        Type: NetLogic
+        Children:
+        - Class: Reference
+          Target: g=493e67f54d4575fd3563bee17ea96bdf
+          Direction: Forward
+        - Class: Reference
+          Target: g=fc9123426da45fadc63771c9cc8390ff
+          Direction: Forward
+        - Class: Reference
+          Target: g=d869e708d4312ce5c50b533f899eb6da
+          Direction: Forward
+      - Name: MouseDownEventHandler1
+        Type: EventHandler
+        Children:
+        - Name: ListenEventType
+          Type: PropertyType
+          DataType: NodeId
+          Value: {"Id":14,"Namespace":5}
+        - Name: MethodsToCall
+          Type: BaseObjectType
+          Children:
+          - Name: MethodContainer1
+            Type: BaseObjectType
+            Children:
+            - Name: ObjectPointer
+              Type: NodePointer
+              DataType: NodeId
+              Value: {"IdType":0,"Id":0,"Namespace":-1}
+              Children:
+              - Name: Kind
+                Type: PropertyType
+                DataType: NodeId
+                Value: {"Id":58}
+              - Name: DynamicLink
+                Type: DynamicLink
+                DataType: NodePath
+                Value: "../../../../MovingScript@NodeId"
+            - Name: Method
+              Type: BaseDataVariableType
+              DataType: String
+              Value: "MovingMethod"
+        - Name: EventArguments
+          Type: MouseDownEvent
+          Children:
+          - Name: EventId
+            Type: PropertyType
+            DataType: ByteString
+            Value: ""
+          - Name: EventType
+            Type: PropertyType
+            DataType: NodeId
+            Value: {"IdType":0,"Id":0,"Namespace":-1}
+          - Name: SourceNode
+            Type: PropertyType
+            DataType: NodeId
+            Value: {"IdType":0,"Id":0,"Namespace":-1}
+          - Name: SourceName
+            Type: PropertyType
+            DataType: String
+            Value: ""
+          - Name: Time
+            Type: PropertyType
+            DataType: UtcTime
+            Value: "1601-01-01T00:00:00.0000000"
+          - Name: ReceiveTime
+            Type: PropertyType
+            DataType: UtcTime
+            Value: "1601-01-01T00:00:00.0000000"
+          - Name: Message
+            Type: PropertyType
+            DataType: LocalizedText
+            Value: {"NamespaceIndex":-1,"LocaleId":"","Text":""}
+          - Name: Severity
+            Type: PropertyType
+            DataType: UInt16
+            Value: 0
+    - Name: Score
+      Type: Label
+      Children:
+      - Name: ScoreCount
+        Type: NetLogic
+        Children:
+        - Class: Reference
+          Target: g=97220b5a83a14dc50e8e3bb6360399b6
+          Direction: Forward
 - File: Screens/Screens.yaml
 - File: Templates/Templates.yaml
