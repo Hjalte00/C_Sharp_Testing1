@@ -11,6 +11,7 @@ using FTOptix.CoreBase;
 using FTOptix.Core;
 using System.Drawing;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 #endregion
 
 public class MovingScript : BaseNetLogic
@@ -19,62 +20,81 @@ public class MovingScript : BaseNetLogic
     public Item MovingRectangleItem;
     public static int GlobalScoreCounter = 0;
     private PeriodicTask myPeriodicTask;
-    public FTOptix.Core.Color StartColor;
-    public FTOptix.Core.Color EndColor;
     public System.Drawing.Color DynamicColor;
-    public float Duration = 1000f;
+    public float Duration;
     public float TimeCounter = 0f;
     public Stopwatch CountingWatch;
+    public float GreenCounter = 0f;
+    public float RedCounter = 0f;
 
     public override void Start()
     {
         MovingRectangle = Owner as FTOptix.UI.Rectangle;
         MovingRectangleItem = Owner as Item;
-        MovingRectangle.FillColor = Colors.LightGreen;
-        StartColor = Colors.LightGreen;
-        EndColor = Colors.Red;
+        DynamicColor = System.Drawing.Color.Green;
+        MovingRectangle.FillColor = (UAValue)(UInt32)((DynamicColor.A << 24) | ((DynamicColor.R) << 16) |
+            ((DynamicColor.G + 127) << 8) | (DynamicColor.B << 0));
+        Duration = 40f;
     }
-
     public override void Stop()
     {
-        // Insert code to be executed when the user-defined logic is stopped
+        Log.Info("Stopped");
+        Log.Info(TimeCounter.ToString());
+
+
     }
+
+    [ExportMethod]
+    public void ColorChangeMethod()
+    {
+
+        if (TimeCounter >= Duration)
+        {
+            ResetMethod();
+        }
+        else
+        {
+            TimeCounter = TimeCounter + 1f;
+
+                GreenCounter = (TimeCounter / Duration) * 255f;
+                RedCounter = (TimeCounter / Duration) * 255f;
+
+        }
+
+        //Color conversion from ARGB to UINT + Change color
+        MovingRectangle.FillColor = (UAValue)(UInt32)((DynamicColor.A << 24) | ((DynamicColor.R + (int)RedCounter) << 16) |
+            ((DynamicColor.G+127 - (int)GreenCounter) << 8) | (DynamicColor.B << 0));
+     }
 
     [ExportMethod]
     public void MovingMethod()
     {
-
         MovingRectangle.Height = MovingRectangle.Height - 1;
         MovingRectangle.Width = MovingRectangle.Width - 1;
         ScoreCount.Score();
         ColorMethod();
-
     }
 
     [ExportMethod]
     public void ColorMethod()
     {
-        myPeriodicTask = new PeriodicTask(ColorChangeMethod, 5, LogicObject);
+        myPeriodicTask = new PeriodicTask(ColorChangeMethod, 50, LogicObject);
         myPeriodicTask.Start();
-        CountingWatch.Start();
     }
-    [ExportMethod]
-    public void ColorChangeMethod()
+
+    public void ResetMethod()
     {
 
-        /*
-        float Percent = (TimeCounter / Duration) * 100;
-        DynamicColor.ToArgb().R = StartColor.R + (EndColor.R - StartColor.R) * Percent;
-        */
-        TimeCounter = TimeCounter + 5f;
-        Log.Info(TimeCounter.ToString());
-
-        /*Log.Info(CountingWatch.ElapsedMilliseconds.ToString());
-        if (CountingWatch.ElapsedMilliseconds >= 1000)
-        {
-            CountingWatch.Stop();
-            myPeriodicTask.Cancel();
-
-        }*/
+        //Reset:
+        //Reset Color:
+        MovingRectangle.FillColor = Colors.Blue; //(UAValue)(UInt32)((DynamicColor.A << 24) | ((DynamicColor.R) << 16) |
+            //((DynamicColor.G + 127) << 8) | (DynamicColor.B << 0));
+        //Stop periodic task:
+        myPeriodicTask.Dispose();
+        //Reset Counter
+        TimeCounter = 0f;
+        Log.Info("Reset Complete");
+        //Call stop:
+        Stop();
     }
 }
