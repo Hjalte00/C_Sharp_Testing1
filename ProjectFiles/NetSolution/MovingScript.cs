@@ -26,6 +26,12 @@ public class MovingScript : BaseNetLogic
     public Stopwatch CountingWatch;
     public float GreenCounter = 0f;
     public float RedCounter = 0f;
+    public Window WindowItem;
+    public Random RandomLeftMarginGenerator;
+    public Random RandomTopMarginGenerator;
+    public int RandomLeftMargin;
+    public int RandomTopMargin;
+    
 
     public override void Start()
     {
@@ -35,13 +41,15 @@ public class MovingScript : BaseNetLogic
         MovingRectangle.FillColor = (UAValue)(UInt32)((DynamicColor.A << 24) | ((DynamicColor.R) << 16) |
             ((DynamicColor.G + 127) << 8) | (DynamicColor.B << 0));
         Duration = 40f;
+        WindowItem = Owner.Owner.Owner as Window;
+        MovingRectangle.Height = 51;
+        MovingRectangle.Width = 51;
+        MovingRectangleItem.LeftMargin = WindowItem.Width/2+25; //25 because rectangle is 50 (51) wide
     }
     public override void Stop()
     {
         Log.Info("Stopped");
         Log.Info(TimeCounter.ToString());
-
-
     }
 
     [ExportMethod]
@@ -71,6 +79,16 @@ public class MovingScript : BaseNetLogic
     {
         MovingRectangle.Height = MovingRectangle.Height - 1;
         MovingRectangle.Width = MovingRectangle.Width - 1;
+        //Insert method to move object
+        
+        RandomLeftMargin = RandomLeftMarginGenerator.Next(0, (int)(WindowItem.Width - MovingRectangle.Width));
+        RandomTopMargin = RandomTopMarginGenerator.Next(0, (int)(WindowItem.Height - MovingRectangle.Height));
+
+        Log.Info(RandomLeftMargin.ToString(), RandomTopMargin.ToString());
+
+        MovingRectangleItem.LeftMargin = RandomLeftMargin;
+        MovingRectangleItem.TopMargin = RandomTopMargin;
+
         ScoreCount.Score();
         ColorMethod();
     }

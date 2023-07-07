@@ -76,7 +76,7 @@ Children:
     Type: BaseDataVariableType
     DataType: Size
     ModellingRule: Optional
-    Value: 800.0
+    Value: 850.0
   - Name: Height
     Type: BaseDataVariableType
     DataType: Size
@@ -538,5 +538,10 @@ Children:
         DataType: Size
         ModellingRule: Optional
         Value: 470.0
+    - Name: HorizontalAlignment
+      Type: BaseVariableType
+      DataType: HorizontalAlignment
+      ModellingRule: Optional
+      Value: 3
 - File: Screens/Screens.yaml
 - File: Templates/Templates.yaml
