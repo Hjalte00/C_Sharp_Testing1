@@ -76,7 +76,7 @@ Children:
     Type: BaseDataVariableType
     DataType: Size
     ModellingRule: Optional
-    Value: 850.0
+    Value: 800.0
   - Name: Height
     Type: BaseDataVariableType
     DataType: Size
@@ -370,6 +370,9 @@ Children:
         - Class: Reference
           Target: g=d869e708d4312ce5c50b533f899eb6da
           Direction: Forward
+        - Class: Reference
+          Target: g=f84b832bbb582f0e2c80c82a517c9541
+          Direction: Forward
       - Name: MouseDownEventHandler1
         Type: EventHandler
         Children:
@@ -443,6 +446,9 @@ Children:
         Children:
         - Class: Reference
           Target: g=97220b5a83a14dc50e8e3bb6360399b6
+          Direction: Forward
+        - Class: Reference
+          Target: g=b635dd3867345d35d9caf61beda6b4ad
           Direction: Forward
     - Name: Screen1
       Type: Screen
@@ -543,5 +549,73 @@ Children:
       DataType: HorizontalAlignment
       ModellingRule: Optional
       Value: 3
+    - Name: Button1
+      Type: Button
+      Children:
+      - Name: MouseClickEventHandler1
+        Type: EventHandler
+        Children:
+        - Name: ListenEventType
+          Type: PropertyType
+          DataType: NodeId
+          Value: {"Id":16,"Namespace":5}
+        - Name: MethodsToCall
+          Type: BaseObjectType
+          Children:
+          - Name: MethodContainer1
+            Type: BaseObjectType
+            Children:
+            - Name: ObjectPointer
+              Type: NodePointer
+              DataType: NodeId
+              Value: {"IdType":0,"Id":0,"Namespace":-1}
+              Children:
+              - Name: Kind
+                Type: PropertyType
+                DataType: NodeId
+                Value: {"Id":58}
+              - Name: DynamicLink
+                Type: DynamicLink
+                DataType: NodePath
+                Value: "../../../../../MovingRectangle/MovingScript@NodeId"
+            - Name: Method
+              Type: BaseDataVariableType
+              DataType: String
+              Value: "InitializeMethod"
+        - Name: EventArguments
+          Type: MouseClickEvent
+          Children:
+          - Name: EventId
+            Type: PropertyType
+            DataType: ByteString
+            Value: ""
+          - Name: EventType
+            Type: PropertyType
+            DataType: NodeId
+            Value: {"IdType":0,"Id":0,"Namespace":-1}
+          - Name: SourceNode
+            Type: PropertyType
+            DataType: NodeId
+            Value: {"IdType":0,"Id":0,"Namespace":-1}
+          - Name: SourceName
+            Type: PropertyType
+            DataType: String
+            Value: ""
+          - Name: Time
+            Type: PropertyType
+            DataType: UtcTime
+            Value: "1601-01-01T00:00:00.0000000"
+          - Name: ReceiveTime
+            Type: PropertyType
+            DataType: UtcTime
+            Value: "1601-01-01T00:00:00.0000000"
+          - Name: Message
+            Type: PropertyType
+            DataType: LocalizedText
+            Value: {"NamespaceIndex":-1,"LocaleId":"","Text":""}
+          - Name: Severity
+            Type: PropertyType
+            DataType: UInt16
+            Value: 0
 - File: Screens/Screens.yaml
 - File: Templates/Templates.yaml

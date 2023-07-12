@@ -27,10 +27,8 @@ public class MovingScript : BaseNetLogic
     public float GreenCounter = 0f;
     public float RedCounter = 0f;
     public Window WindowItem;
-    public Random RandomLeftMarginGenerator;
-    public Random RandomTopMarginGenerator;
-    public int RandomLeftMargin;
-    public int RandomTopMargin;
+    public int MovingWidth;
+    public int MovingHeight;
     
 
     public override void Start()
@@ -40,11 +38,9 @@ public class MovingScript : BaseNetLogic
         DynamicColor = System.Drawing.Color.Green;
         MovingRectangle.FillColor = (UAValue)(UInt32)((DynamicColor.A << 24) | ((DynamicColor.R) << 16) |
             ((DynamicColor.G + 127) << 8) | (DynamicColor.B << 0));
-        Duration = 40f;
         WindowItem = Owner.Owner.Owner as Window;
-        MovingRectangle.Height = 51;
-        MovingRectangle.Width = 51;
-        MovingRectangleItem.LeftMargin = WindowItem.Width/2+25; //25 because rectangle is 50 (51) wide
+        InitializeMethod();
+
     }
     public override void Stop()
     {
@@ -53,6 +49,18 @@ public class MovingScript : BaseNetLogic
     }
 
     [ExportMethod]
+    public void InitializeMethod()
+    {
+        //Stop();
+        Duration = 40f;
+        MovingRectangle.Height = 51;
+        MovingRectangle.Width = 51;
+        MovingRectangleItem.LeftMargin = WindowItem.Width / 2 - 25; //25 because rectangle is 50 (51) wide
+        MovingRectangleItem.TopMargin = WindowItem.Height / 2 - 25;
+        ScoreCount.ScoreReset();
+    }
+
+        [ExportMethod]
     public void ColorChangeMethod()
     {
 
@@ -80,12 +88,15 @@ public class MovingScript : BaseNetLogic
         MovingRectangle.Height = MovingRectangle.Height - 1;
         MovingRectangle.Width = MovingRectangle.Width - 1;
         //Insert method to move object
-        
-        RandomLeftMargin = RandomLeftMarginGenerator.Next(0, (int)(WindowItem.Width - MovingRectangle.Width));
-        RandomTopMargin = RandomTopMarginGenerator.Next(0, (int)(WindowItem.Height - MovingRectangle.Height));
+        MovingWidth = ((int)(WindowItem.Width - MovingRectangle.Width));
+        Random RandomLeftMarginGenerator = new Random();
+        int RandomLeftMargin = RandomLeftMarginGenerator.Next(0, MovingWidth);
 
-        Log.Info(RandomLeftMargin.ToString(), RandomTopMargin.ToString());
+        MovingHeight = ((int)(WindowItem.Height - MovingRectangle.Height));
+        Random RandomTopMarginGenerator = new Random();
+        int RandomTopMargin = RandomTopMarginGenerator.Next(0, MovingHeight);
 
+        //Log.Info(RandomLeftMargin.ToString() +","+ RandomTopMargin.ToString());
         MovingRectangleItem.LeftMargin = RandomLeftMargin;
         MovingRectangleItem.TopMargin = RandomTopMargin;
 

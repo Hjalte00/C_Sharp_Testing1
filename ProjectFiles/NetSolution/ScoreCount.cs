@@ -31,4 +31,11 @@ public class ScoreCount : BaseNetLogic
         MovingScript.GlobalScoreCounter++;
         ScoreCount.ScoreTextLabel.Text = "Score: " + MovingScript.GlobalScoreCounter;
     }
+
+    [ExportMethod]
+    public static void ScoreReset()
+    {
+        MovingScript.GlobalScoreCounter = 0;
+        ScoreCount.ScoreTextLabel.Text = "Score: " + MovingScript.GlobalScoreCounter;
+    }
 }
